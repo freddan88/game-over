@@ -1,9 +1,6 @@
+### Project Game Over
 
-Yrgo - Game Over - Project Canvas
-
-### ## Project Game Over
-
-> Project in canvas using Phaser.js at Yrgo in Sweden Gothenburg. Deadline for: 2019-05-27
+> Project Canvas using Phaser.js at Yrgo in Sweden Gothenburg. Deadline for: 2019-05-27
 
 _Languages Used:_ \
 _HTML, Javascript, [Phaser.js](https://phaser.io "Phaser.js"), Markdown <- Readme.md_
