@@ -8,6 +8,7 @@ const gameState = {
     width: 400,
     height: 800,
     backgroundColor: 0X000000,
+    title: 'WU18 - DinoBall',
     scene: [Pinball],
     physics: {
       default: 'arcade',
