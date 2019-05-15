@@ -6,6 +6,7 @@ class Pinball extends Phaser.Scene {
     preload() {
         this.load.image('flipperRight', 'assets/sprites/flipper-right.png');
         this.load.image('flipperLeft', 'assets/sprites/flipper-left.png');
+        this.load.image('ball', 'assets/sprites/ball.png');
     }
 
     create() {
@@ -20,10 +21,19 @@ class Pinball extends Phaser.Scene {
 
         gameState.rightFlipper = this.add.sprite(340, 703, 'flipperRight').setOrigin(1, 0);
         // gameState.leftFlipper = this.add.sprite(40, 700, 'flipperLeft').setOrigin(0, 0);
+
+
+        gameState.ball = this.physics.add.sprite(130, 200, 'ball').setOrigin(0, 0).setBounceY(2);
+        
+
         gameState.leftFlipper = this.physics.add.sprite(40, 700, 'flipperLeft').setOrigin(0, 0);
-        gameState.leftFlipper.body.setAllowGravity(false);
+        gameState.leftFlipper.enableBody = true;
+        gameState.leftFlipper.body.setAllowGravity(false).setCircle(20);
+        gameState.leftFlipper.body.moves=false;
         gameState.rightFlipper.setInteractive();
         gameState.leftFlipper.setInteractive();
+
+        this.physics.add.collider(gameState.leftFlipper, gameState.ball);
     }
 
     update() {
@@ -39,5 +49,6 @@ class Pinball extends Phaser.Scene {
         if (gameState.cursors.right.isUp) {
             gameState.rightFlipper.angle = 0;
         }
+
     }
 }
