@@ -11,11 +11,12 @@ const gameState = {
     title: 'WU18 - DinoBall',
     scene: [Pinball],
     physics: {
-      default: 'arcade',
-      arcade: {
+      default: "matter",
+      matter: {
         gravity: { y: 300 },
         debug: true,
         enableBody: true,
+        enableSleeping: true
       }
     }
   };
