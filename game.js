@@ -13,7 +13,7 @@ const gameState = {
     physics: {
       default: "matter",
       matter: {
-        gravity: { y: 300 },
+        gravity: { y: 0.8 },
         debug: true,
         enableBody: true,
         enableSleeping: true
