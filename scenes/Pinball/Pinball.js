@@ -11,6 +11,8 @@ class Pinball extends Phaser.Scene {
         this.load.image('flipperRight', 'assets/sprites/flipper-right.png');
         this.load.image('flipperBrick28', 'assets/sprites/flipperBrick28.png');
         this.load.image('flipperBrick1', 'assets/sprites/flipperBrick.png');
+        this.load.image('flipperBumperR', 'assets/sprites/flipperBumperRight.png');
+        this.load.image('flipperBumperL', 'assets/sprites/flipperBumperRight.png');
     }
 
     create() {
@@ -19,16 +21,33 @@ class Pinball extends Phaser.Scene {
         this.matter.world.setBounds(0, 0, 400, 800, 1, true, true, true, false);
 
         gameState.ball = this.matter.add.image(280, 10, 'ball')
-        .setBounce(5)
+        .setBounce(2)
         .setFriction(0)
         .setCircle();
-        // gameState.ball.body.restitution = 5;
+        // gameState.ball.body.restitution = 11;
+        gameState.ball.body.restitution = 0.2;
+
+        gameState.flippR = this.matter.add.image(300, 680, 'flipperBumperR')
+        .setFrictionAir(0.2)
+
+        this.matter.add.worldConstraint(gameState.flippR, 1, 1, {
+			pointA: { x: 300, y: 680 }, 
+            pointB: { x: 42, y: 0 },
+        });
+        
+        gameState.flippL = this.matter.add.image(80, 680, 'flipperBumperL')
+        .setFrictionAir(0.2)
+
+        this.matter.add.worldConstraint(gameState.flippL, 1, 0, {
+			pointA: { x: 80, y: 680 }, 
+            pointB: { x: 42, y: 0 },
+		});
 
         
         gameState.flipperBrick1 = this.matter.add.image(325, 740, 'flipperBrick1').setCircle().setScale(0.8).setStatic(true);
         gameState.flipperBrick1.body.label = 'StopperR1';
 
-        gameState.flipperBrick2 = this.matter.add.image(296, 740, 'flipperBrick1').setCircle().setScale(0.6).setStatic(true);
+        gameState.flipperBrick2 = this.matter.add.image(320, 670, 'flipperBrick1').setStatic(true);
         gameState.flipperBrick2.body.label = 'StopperR2';
         
         gameState.flipperBrick3 = this.matter.add.image(274, 740, 'flipperBrick1').setCircle().setScale(0.4).setStatic(true);
@@ -66,23 +85,17 @@ class Pinball extends Phaser.Scene {
 
     update() {
         if (gameState.cursors.left.isDown) {
-            gameState.leftFlipperL1.angle = -30;
-            gameState.leftFlipperL2.angle = -30;
             gameState.flipperBrick1.x -= 2;
         }
         if (gameState.cursors.left.isUp) {
-            gameState.leftFlipperL1.angle = 0;
-            gameState.leftFlipperL2.angle = 0;
+            gameState.flippL.setVelocityY(-100)
         }
         if (gameState.cursors.right.isDown) {
-            gameState.rightFlipperL1.angle = 30;
-            gameState.rightFlipperL2.angle = 30;
             gameState.flipperBrick1.x += 2;
-            
+            gameState.flippR.setVelocityY(-25)
         }
         if (gameState.cursors.right.isUp) {
-            gameState.rightFlipperL1.angle = 0;
-            gameState.rightFlipperL2.angle = 0;
+            gameState.flippR.setVelocityY(5)
         }
     }
 }
