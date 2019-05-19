@@ -9,18 +9,18 @@ class Pinball extends Phaser.Scene {
         this.load.image('ball', 'assets/sprites/ball.png');
         this.load.image('paddle', 'assets/sprites/flipperShape.png');
         this.load.image('flipperRight', 'assets/sprites/flipper-right.png');
-        console.log('Matter: ', this.matter)
     }
 
     create() {
-        const shapes = this.cache.json.get('shapes');
+        const shapes = this.cache.json.get('shapes', {});
         gameState.cursors = this.input.keyboard.createCursorKeys();
         this.matter.world.setBounds(0, 0, 400, 800, 1, true, true, true, false);
 
-        gameState.ball = this.matter.add.image(250, 10, 'ball')
-        .setBounce(150)
-        .setFriction(0.15)
+        gameState.ball = this.matter.add.image(280, 10, 'ball')
+        .setBounce(5)
+        .setFriction(0)
         .setCircle();
+        gameState.ball.body.restitution = 5;
 
         gameState.rightFlipper = this.matter.add.sprite(300, 720, 'sheet', 'flipperRight', {shape: shapes.flipper_right})
         .setStatic(true);
@@ -28,7 +28,18 @@ class Pinball extends Phaser.Scene {
         gameState.leftFlipper = this.matter.add.sprite(80, 720, 'sheet', 'flipperLeft', {shape: shapes.flipper_left})
         .setStatic(true);
 
-        console.log(gameState.rightFlipper.body)
+        const cat1 = this.matter.world.nextCategory();
+        const cat2 = this.matter.world.nextCategory();
+
+        gameState.ball.setCollisionCategory(cat1);
+        gameState.rightFlipper.setCollisionCategory(cat1);
+        gameState.leftFlipper.setCollisionCategory(cat2);
+        gameState.ball.setCollidesWith([ cat1, cat2 ]);
+
+        this.matter.world.on('collisionstart', function (event) {
+            event.pairs[0].bodyA.gameObject.setTint(0xff0000);
+            event.pairs[0].bodyB.gameObject.setTint(0x00ff00);
+        });
     }
 
     update() {
