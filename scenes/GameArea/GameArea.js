@@ -43,8 +43,8 @@ class GameArea extends Phaser.Scene {
       gameState.twentyBumper = this.matter.add.sprite(180, 250, 'sheet', '20_bumper', {shape: shapes.twenty_bumper})
       .setCircle(25)
       .setFriction(0)
-      .setVelocity(20)
       .setBounce(10)
+      .setIgnoreGravity(true)
       console.log(gameState.twentyBumper.friction);
 
       gameState.fifteenBumper = this.matter.add.sprite(100, 320, 'sheet', '15_bumper', {shape: shapes.fifteen_bumper})
@@ -70,6 +70,5 @@ class GameArea extends Phaser.Scene {
       //.setOrigin(1, 0)
       .setDensity(50)
       .setMass(50)
-
-    }
+  }
 }
