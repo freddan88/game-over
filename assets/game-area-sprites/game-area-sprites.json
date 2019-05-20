@@ -1,0 +1,251 @@
+{
+	"textures": [
+		{
+			"image": "game-sprites.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 408,
+				"h": 490
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "top_dome",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 400,
+						"h": 241
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 400,
+						"h": 241
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 400,
+						"h": 241
+					}
+				},
+				{
+					"filename": "ball_shoot_wall",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4,
+						"h": 452
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4,
+						"h": 452
+					},
+					"frame": {
+						"x": 403,
+						"y": 1,
+						"w": 4,
+						"h": 452
+					}
+				},
+				{
+					"filename": "left_bumper",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 143,
+						"h": 124
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 143,
+						"h": 124
+					},
+					"frame": {
+						"x": 1,
+						"y": 244,
+						"w": 143,
+						"h": 124
+					}
+				},
+				{
+					"filename": "right_bumper",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 143,
+						"h": 124
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 143,
+						"h": 124
+					},
+					"frame": {
+						"x": 146,
+						"y": 244,
+						"w": 143,
+						"h": 124
+					}
+				},
+				{
+					"filename": "right_side_slope",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 81,
+						"h": 124
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 81,
+						"h": 124
+					},
+					"frame": {
+						"x": 291,
+						"y": 244,
+						"w": 81,
+						"h": 124
+					}
+				},
+				{
+					"filename": "left_side_slope",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 82,
+						"h": 119
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 82,
+						"h": 119
+					},
+					"frame": {
+						"x": 1,
+						"y": 370,
+						"w": 82,
+						"h": 119
+					}
+				},
+				{
+					"filename": "10_bumper",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 50,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 50,
+						"h": 50
+					},
+					"frame": {
+						"x": 85,
+						"y": 370,
+						"w": 50,
+						"h": 50
+					}
+				},
+				{
+					"filename": "15_bumper",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 50,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 50,
+						"h": 50
+					},
+					"frame": {
+						"x": 85,
+						"y": 370,
+						"w": 50,
+						"h": 50
+					}
+				},
+				{
+					"filename": "20_bumper",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 50,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 50,
+						"h": 50
+					},
+					"frame": {
+						"x": 85,
+						"y": 370,
+						"w": 50,
+						"h": 50
+					}
+				},
+				{
+					"filename": "5_bumper",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 50,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 50,
+						"h": 50
+					},
+					"frame": {
+						"x": 85,
+						"y": 370,
+						"w": 50,
+						"h": 50
+					}
+				},
+				{
+					"filename": "left_side_bumper",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 38,
+						"h": 119
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 38,
+						"h": 119
+					},
+					"frame": {
+						"x": 137,
+						"y": 370,
+						"w": 38,
+						"h": 119
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:e41cb660b2e4d1639a072e7586a4c359:af8d6827b47dc873d76238a0645c58dd:6c31e76162759595c120c84b8850a36e$"
+	}
+}
