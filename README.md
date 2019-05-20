@@ -12,6 +12,7 @@ _HTML, Javascript, [Phaser.js](https://phaser.io "Phaser.js"), Markdown <- Readm
 - [Fredrik Leemann](https://github.com/freddan88 "freddan88")
 
 ### Pull Request Log
+Fredrik Leemann - [Paddle function to master](https://github.com/freddan88/game-over/pull/1)
 
 ### Resources
 - [Codecademy.com, Game Development with Phaser.JS](https://www.codecademy.com/login)
