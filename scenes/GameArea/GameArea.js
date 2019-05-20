@@ -4,72 +4,132 @@ class GameArea extends Phaser.Scene {
   }
 
   preload() {
-      this.load.json('shapes', 'assets/game-area-sprites/game-area.json');
-      this.load.atlas('sheet', 'assets/game-area-sprites/game-area-sprites.png', 'assets/game-area-sprites/game-area-sprites.json')
+    this.load.image('ball', 'assets/sprites/ball.png');
+    this.load.json('shapes', 'assets/game-area-sprites/game-area.json');
+    this.load.atlas('sheet', 'assets/game-area-sprites/game-area-sprites.png', 'assets/game-area-sprites/game-area-sprites.json')
   }
 
   create() {
       const shapes = this.cache.json.get('shapes');
       gameState.cursors = this.input.keyboard.createCursorKeys();
+      this.matter.world.setBounds(0, 0, 400, 800, 1, true, true, true, false);
       
-      gameState.scoreBoard = this.add.rectangle(0, 0, 400, 80, 0x555555)
-      .setOrigin(0,0);
+      gameState.ball = this.matter.add.image(280, 10, 'ball')
+      .setBounce(2)
+      .setFriction(0)
+      .setCircle();
+      gameState.ball.body.restitution = 0.2;
 
       let generalConfig = {
       setIgnoreGravity: true,
-      setStatic: true,
+      setInteractive: true,
       setDensity: 50,
-      setMass: 300,
+      setMass: 50,
       };
 
-      gameState.topDome = this.matter.add.sprite(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome}, generalConfig)
-
-      gameState.leftSideBumper = this.matter.add.sprite(20, 410, 'sheet', 'left_side_bumper', {shape: shapes.left_side_bumper}, generalConfig)
-
-      gameState.ballShootWall = this.matter.add.sprite(370, 480, 'sheet', 'ball_shoot_wall', {shape: shapes.ball_shoot_wall}, generalConfig)
-
-      gameState.leftBumper = this.matter.add.sprite(330, 700, 'sheet', 'right_bumper', {shape: shapes.right_bumper}, generalConfig)
-
-      gameState.rightBumper = this.matter.add.sprite(50, 700, 'sheet', 'left_bumper', {shape: shapes.left_bumper}, generalConfig)
-
-      let circleConfig = {
-        setCircle: 25,
-        setIgnoreGravity: true,
-        setInteractive: true,
-        setDensity: 50,
-        setMass: 20
-      }
-
-      gameState.twentyBumper = this.matter.add.sprite(180, 250, 'sheet', '20_bumper', {shape: shapes.twenty_bumper})
-      .setCircle(25)
-      .setFriction(0)
-      .setVelocity(20)
-      .setBounce(10)
-      console.log(gameState.twentyBumper.friction);
-
-      gameState.fifteenBumper = this.matter.add.sprite(100, 320, 'sheet', '15_bumper', {shape: shapes.fifteen_bumper})
-      .setCircle(25)
+      gameState.topDome = this.matter.add.image(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome})
       .setIgnoreGravity(true)
       .setInteractive()
-      //.setOrigin(1, 0)
       .setDensity(50)
       .setMass(50)
+      gameState.topDome.body.label = 'topDome';
+
+      gameState.leftSideBumper = this.matter.add.image(20, 410, 'sheet', 'left_side_bumper', {shape: shapes.left_side_bumper})
+      .setIgnoreGravity(true)
+      .setInteractive()
+      .setDensity(50)
+      .setMass(50)
+      gameState.leftSideBumper.body.label = 'leftSideBumper';
+
+      gameState.ballShootWall = this.matter.add.image(370, 480, 'sheet', 'ball_shoot_wall', {shape: shapes.ball_shoot_wall})
+      .setIgnoreGravity(true)
+      .setInteractive()
+      .setDensity(50)
+      .setMass(50)
+      gameState.ballShootWall.body.label = 'ballShootWall';
+
+      gameState.leftBumper = this.matter.add.image(330, 700, 'sheet', 'right_bumper', {shape: shapes.right_bumper})
+      .setIgnoreGravity(true)
+      .setInteractive()
+      .setDensity(50)
+      .setMass(50)
+      gameState.leftBumper.body.label = 'leftBumper';
+
+      gameState.rightBumper = this.matter.add.image(50, 700, 'sheet', 'left_bumper', {shape: shapes.left_bumper})
+      .setIgnoreGravity(true)
+      .setInteractive()
+      .setDensity(50)
+      .setMass(50)
+      gameState.rightBumper.body.label = 'rightBumper';
       
-      gameState.tenBumper = this.matter.add.sprite(290, 300, 'sheet', '10_bumper', {shape: shapes.ten_bumper})
+      gameState.twentyBumper = this.matter.add.image(180, 250, 'sheet', '20_bumper', {shape: shapes.twenty_bumper})
       .setCircle(25)
       .setIgnoreGravity(true)
       .setInteractive()
-      //.setOrigin(1, 0)
       .setDensity(50)
       .setMass(50)
+      gameState.twentyBumper.body.label = 'twentyBumper';
 
-      gameState.fiveBumper = this.matter.add.sprite(210, 370, 'sheet', '5_bumper', {shape: shapes.five_bumper})
+      gameState.fifteenBumper = this.matter.add.image(100, 320, 'sheet', '15_bumper', {shape: shapes.fifteen_bumper})
       .setCircle(25)
       .setIgnoreGravity(true)
       .setInteractive()
-      //.setOrigin(1, 0)
       .setDensity(50)
       .setMass(50)
+      gameState.fifteenBumper.body.label = 'fifteenBumper';
 
+      
+      gameState.tenBumper = this.matter.add.image(290, 300, 'sheet', '10_bumper', {shape: shapes.ten_bumper})
+      .setCircle(25)
+      .setIgnoreGravity(true)
+      .setInteractive()
+      .setDensity(50)
+      .setMass(50)
+      gameState.tenBumper.body.label = 'tenBumper';
+
+
+      gameState.fiveBumper = this.matter.add.image(210, 370, 'sheet', '5_bumper', {shape: shapes.five_bumper})
+      .setCircle(25)
+      .setIgnoreGravity(true)
+      .setInteractive()
+      .setDensity(50)
+      .setMass(50)
+      gameState.fiveBumper.body.label = 'fiveBumper';
+
+      
+
+      this.matter.world.on('collisionstart', function (event) {
+        if (event.pairs[0].bodyB.label === 'rightBumper'){
+            console.log("hit");
+            event.pairs[0].bodyA.gameObject.setVelocityY(-10);
+        }
+        if (event.pairs[0].bodyB.label === 'leftBumper'){
+            console.log("hit");
+            event.pairs[0].bodyA.gameObject.setVelocityY(-15);
+        }
+        if (event.pairs[0].bodyB.label === 'ballShootWall'){
+            console.log("hit");
+            event.pairs[0].bodyA.gameObject.setVelocityY(-20);
+        }
+        if (event.pairs[0].bodyB.label === 'topDome'){
+            event.pairs[0].bodyA.gameObject.setVelocityY(-25);
+        }
+        if (event.pairs[0].bodyB.label === 'twentyBumper'){
+            console.log("hit");
+            event.pairs[0].bodyA.gameObject.setVelocityY(-25);
+        }
+        if (event.pairs[0].bodyB.label === 'fifteenBumper'){
+            console.log("hit");
+            event.pairs[0].bodyA.gameObject.setVelocityY(-25);
+        }
+        if (event.pairs[0].bodyB.label === 'tenBumper'){
+            console.log("hit");
+            event.pairs[0].bodyA.gameObject.setVelocityY(-25);
+        }
+        if (event.pairs[0].bodyB.label === 'fiveBumper'){
+            console.log("hit");
+            event.pairs[0].bodyA.gameObject.setVelocityY(-25);
+        }
+    });
     }
 }
