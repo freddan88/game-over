@@ -4,9 +4,9 @@ class Pinball extends Phaser.Scene {
     }
   
     preload() {
-        this.load.image('flipperPaddleR', 'assets/sprites/flipperPaddle.png');
-        this.load.image('flipperPaddleL', 'assets/sprites/flipperPaddle.png');
-        this.load.image('ball', 'assets/sprites/ball.png');
+      this.load.image('ball', 'assets/sprites/ball.png');
+      this.load.image('flipperPaddleR', 'assets/sprites/flipperPaddle.png');
+      this.load.image('flipperPaddleL', 'assets/sprites/flipperPaddle.png');
     }
   
     create() {
