@@ -20,47 +20,20 @@ class GameArea extends Phaser.Scene {
       .setCircle();
       gameState.ball.body.restitution = 0.2;
 
-      let generalConfig = {
-        setIgnoreGravity: true,
-        setDensity: 50,
-        setMass: 50,
-        setInteractive: true,
-        setStatic: true
-      };
 
       gameState.topDome = this.matter.add.image(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome})
       gameState.topDome.body.label = 'topDome';
 
       gameState.leftSideBumper = this.matter.add.image(20, 480, 'sheet', 'left_side_bumper', {shape: shapes.left_side_bumper})
-      // .setIgnoreGravity(true)
-      // .setDensity(50)
-      // .setMass(50)
-      // .setInteractive(true)
-      // .setStatic(true)
       gameState.leftSideBumper.body.label = 'leftSideBumper';
 
       gameState.ballShootWall = this.matter.add.image(370, 500, 'sheet', 'ball_shoot_wall', {shape: shapes.ball_shoot_wall})
-      // .setIgnoreGravity(true)
-      // .setDensity(50)
-      // .setMass(50)
-      // .setInteractive(true)
-      // .setStatic(true)
       gameState.ballShootWall.body.label = 'ballShootWall';
 
       gameState.leftBumper = this.matter.add.image(330, 700, 'sheet', 'right_bumper', {shape: shapes.right_bumper})
-      // .setIgnoreGravity(true)
-      // .setDensity(50)
-      // .setMass(50)
-      // .setInteractive(true)
-      // .setStatic(true)
       gameState.leftBumper.body.label = 'leftBumper';
 
-      gameState.rightBumper = this.matter.add.image(50, 710, 'sheet', 'left_bumper', {shape: shapes.left_bumper})
-      // .setIgnoreGravity(true)
-      // .setDensity(50)
-      // .setMass(50)
-      // .setInteractive(true)
-      // .setStatic(true)
+      gameState.rightBumper = this.matter.add.image(50, 700, 'sheet', 'left_bumper', {shape: shapes.left_bumper})
       gameState.rightBumper.body.label = 'rightBumper';
       
       gameState.twentyBumper = this.matter.add.image(180, 250, 'sheet', '20_bumper', {shape: shapes.twenty_bumper})
@@ -88,36 +61,20 @@ class GameArea extends Phaser.Scene {
       
 
       this.matter.world.on('collisionstart', function (event) {
-        if (event.pairs[0].bodyB.label === 'rightBumper'){
-            console.log("rightBumper");
-            event.pairs[0].bodyA.gameObject.setVelocityY(-10);
-        }
-        if (event.pairs[0].bodyB.label === 'leftBumper'){
-            console.log("leftBumper");
-            event.pairs[0].bodyA.gameObject.setVelocityY(-15);
-        }
-        if (event.pairs[0].bodyB.label === 'ballShootWall'){
-            console.log("ballShootWall");
-            event.pairs[0].bodyA.gameObject.setVelocityY(-20);
-        }
-        if (event.pairs[0].bodyB.label === 'topDome'){
-           console.log("topDome");
-            event.pairs[0].bodyA.gameObject.setVelocityY(-25);
-        }
         if (event.pairs[0].bodyB.label === 'twentyBumper'){
-            console.log("twentyBumper");
+            console.log("20");
             event.pairs[0].bodyA.gameObject.setVelocityY(-25);
         }
         if (event.pairs[0].bodyB.label === 'fifteenBumper'){
-            console.log("fifteenBumper");
+            console.log("15");
             event.pairs[0].bodyA.gameObject.setVelocityY(-25);
         }
         if (event.pairs[0].bodyB.label === 'tenBumper'){
-            console.log("tenBumper");
+            console.log("10");
             event.pairs[0].bodyA.gameObject.setVelocityY(-25);
         }
         if (event.pairs[0].bodyB.label === 'fiveBumper'){
-            console.log("fiveBumper");
+            console.log("5");
             event.pairs[0].bodyA.gameObject.setVelocityY(-25);
         }
     });
