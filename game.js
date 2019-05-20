@@ -9,11 +9,11 @@ const gameState = {
     height: 800,
     backgroundColor: 0X000000,
     title: 'WU18 - DinoBall',
-    scene: [GameArea],
+    scene: [Pinball],
     physics: {
       default: 'matter',
       matter: {
-        gravity: { y: 300 },
+        gravity: { y: 0.5 },
         debug: true,
         enableBody: true,
       }
