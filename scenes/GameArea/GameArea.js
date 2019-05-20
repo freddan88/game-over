@@ -17,9 +17,9 @@ class GameArea extends Phaser.Scene {
 
       let generalConfig = {
       setIgnoreGravity: true,
-      setInteractive: true,
-      setDensity:50,
-      setMass: 50
+      setStatic: true,
+      setDensity: 50,
+      setMass: 300,
       };
 
       gameState.topDome = this.matter.add.sprite(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome}, generalConfig)
@@ -37,16 +37,15 @@ class GameArea extends Phaser.Scene {
         setIgnoreGravity: true,
         setInteractive: true,
         setDensity: 50,
-        setMass: 50
+        setMass: 20
       }
 
       gameState.twentyBumper = this.matter.add.sprite(180, 250, 'sheet', '20_bumper', {shape: shapes.twenty_bumper})
       .setCircle(25)
-      .setIgnoreGravity(true)
-      .setInteractive()
-      //.setOrigin(1, 0)
-      .setDensity(50)
-      .setMass(50)
+      .setFriction(0)
+      .setVelocity(20)
+      .setBounce(10)
+      console.log(gameState.twentyBumper.friction);
 
       gameState.fifteenBumper = this.matter.add.sprite(100, 320, 'sheet', '15_bumper', {shape: shapes.fifteen_bumper})
       .setCircle(25)
