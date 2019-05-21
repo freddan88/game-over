@@ -2,6 +2,7 @@ const gameState = {
   score: 0,
   scoreDisplay: '',
   lives: 3,
+  livesDisplay: '',
   gameOver: false
 };
 
