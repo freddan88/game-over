@@ -14,7 +14,7 @@ class Pinball extends Phaser.Scene {
   create() {
     const shapes = this.cache.json.get('shapes');
     gameState.cursors = this.input.keyboard.createCursorKeys();
-    this.matter.world.setBounds(0, 0, 400, 800, 1, true, true, true, false);
+    this.matter.world.setBounds(0, 145, 398, 780, 200, true, true, true, false);
 
     gameState.flipperPaddleR = this.matter.add.image(315, 665, 'flipperPaddleR')
     .setFrictionAir(0.25)
@@ -59,6 +59,7 @@ class Pinball extends Phaser.Scene {
     gameState.leftSideBumper.body.label = 'leftSideBumper';
 
     gameState.ballShootWall = this.matter.add.image(370, 500, 'sheet', 'ball_shoot_wall', {shape: shapes.ball_shoot_wall})
+    .setMass(1)
     gameState.ballShootWall.body.label = 'ballShootWall';
 
     gameState.leftBumper = this.matter.add.image(330, 700, 'sheet', 'right_bumper', {shape: shapes.right_bumper})
