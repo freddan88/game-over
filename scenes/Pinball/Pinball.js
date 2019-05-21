@@ -3,6 +3,7 @@ class Pinball extends Phaser.Scene {
     super({ key: 'Pinball' });
   }
 
+
   preload() {
     this.load.image('flipperPaddleR', 'assets/sprites/flipperPaddle.png');
     this.load.image('flipperPaddleL', 'assets/sprites/flipperPaddle.png');
@@ -68,7 +69,8 @@ class Pinball extends Phaser.Scene {
 
     gameState.topDome = this.matter.add.image(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome})
     gameState.topDome.body.label = 'topDome';
-    gameState.scoreDisplay = this.add.text(20 , 20, 'score: 0', { fontSize: '16px', fill: '#000' });
+    gameState.scoreDisplay = this.add.text(20 , 20, 'score: ' + gameState.score, { fontSize: '16px', fill: '#000' });
+    gameState.livesDisplay = this.add.text(300 , 20, 'lives: ' + gameState.lives, { fontSize: '16px', fill: '#000' });
 
     gameState.leftSideBumper = this.matter.add.image(20, 480, 'sheet', 'left_side_bumper', {shape: shapes.left_side_bumper})
     gameState.leftSideBumper.body.label = 'leftSideBumper';
@@ -153,6 +155,18 @@ class Pinball extends Phaser.Scene {
       gameState.launcher.setVelocityY(-15)
     } else {
       gameState.launcher.setVelocityY(0)
+    }
+
+    if(gameState.ball.y > 800 && gameState.lives >= 0 ){
+      console.log('gone');
+      gameState.lives = gameState.lives -1;
+      gameState.ball = this.matter.add.image(386, 650, 'playball')
+      .setFrictionAir(0)
+      .setFriction(0)
+      .setCircle()
+      gameState.ball.body.label = 'playball'
+      gameState.ball.body.restitution = 0.5;
+      gameState.blocker.y = 125;
     }
   }
 }
