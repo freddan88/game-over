@@ -65,8 +65,10 @@ class Pinball extends Phaser.Scene {
     gameState.ball.body.label = 'playball'
     gameState.ball.body.restitution = 0.5;
 
+
     gameState.topDome = this.matter.add.image(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome})
     gameState.topDome.body.label = 'topDome';
+    gameState.scoreDisplay = this.add.text(20 , 20, 'score: 0', { fontSize: '16px', fill: '#000' });
 
     gameState.leftSideBumper = this.matter.add.image(20, 480, 'sheet', 'left_side_bumper', {shape: shapes.left_side_bumper})
     gameState.leftSideBumper.body.label = 'leftSideBumper';
@@ -103,26 +105,24 @@ class Pinball extends Phaser.Scene {
     this.add.rectangle(386, 691, 30, 100, 0xC4C4C4);
 
     this.matter.world.on('collisionstart', function (event) {
-      const BodyA = event.pairs[0].bodyA;
-      const BodyB = event.pairs[0].bodyB;
       if (event.pairs[0].bodyB.label === 'twentyBumper'){
-        console.log("20");
         gameState.blocker.y = 225;
+        gameState.score = gameState.score + 20;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
       if (event.pairs[0].bodyB.label === 'fifteenBumper'){
-        console.log("15");
         gameState.blocker.y = 225;
+        gameState.score = gameState.score + 15;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
       if (event.pairs[0].bodyB.label === 'tenBumper'){
-        console.log("10");
         gameState.blocker.y = 225;
+        gameState.score = gameState.score + 10;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
       if (event.pairs[0].bodyB.label === 'fiveBumper'){
-        console.log("5");
         gameState.blocker.y = 225;
+        gameState.score = gameState.score + 5;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
       if ((event.pairs[0].bodyB.label === 'flipperPaddleL' && event.pairs[0].bodyA.label === 'playball') || (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleL')){
@@ -131,6 +131,7 @@ class Pinball extends Phaser.Scene {
       if ((event.pairs[0].bodyB.label === 'flipperPaddleR' && event.pairs[0].bodyA.label === 'playball') || (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleR')){
         gameState.blocker.y = 225;
       }
+      gameState.scoreDisplay.setText('Score: ' + gameState.score);
     });
   }
 
