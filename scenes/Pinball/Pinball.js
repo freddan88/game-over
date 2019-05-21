@@ -50,10 +50,10 @@ class Pinball extends Phaser.Scene {
     .setCircle(10)
     gameState.ball.body.restitution = 0.5;
 
-    gameState.scoreDisplay = this.add.text(200, 300, 'score: 0', { fontSize: '32px', fill: '#83ff00' });
 
     gameState.topDome = this.matter.add.image(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome})
     gameState.topDome.body.label = 'topDome';
+    gameState.scoreDisplay = this.add.text(20 , 20, 'score: 0', { fontSize: '16px', fill: '#000' });
 
     gameState.leftSideBumper = this.matter.add.image(20, 480, 'sheet', 'left_side_bumper', {shape: shapes.left_side_bumper})
     gameState.leftSideBumper.body.label = 'leftSideBumper';
