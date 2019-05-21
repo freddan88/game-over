@@ -50,8 +50,10 @@ class Pinball extends Phaser.Scene {
     .setCircle(10)
     gameState.ball.body.restitution = 0.5;
 
+
     gameState.topDome = this.matter.add.image(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome})
     gameState.topDome.body.label = 'topDome';
+    gameState.scoreDisplay = this.add.text(20 , 20, 'score: 0', { fontSize: '16px', fill: '#000' });
 
     gameState.leftSideBumper = this.matter.add.image(20, 480, 'sheet', 'left_side_bumper', {shape: shapes.left_side_bumper})
     gameState.leftSideBumper.body.label = 'leftSideBumper';
@@ -87,21 +89,27 @@ class Pinball extends Phaser.Scene {
 
     this.matter.world.on('collisionstart', function (event) {
       if (event.pairs[0].bodyB.label === 'twentyBumper'){
-        console.log("20");
+        // console.log("20");
+        gameState.score = gameState.score + 20;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
       if (event.pairs[0].bodyB.label === 'fifteenBumper'){
-        console.log("15");
+        // console.log("15");
+        gameState.score = gameState.score + 15;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
       if (event.pairs[0].bodyB.label === 'tenBumper'){
-        console.log("10");
+        // console.log("10");
+        gameState.score = gameState.score + 10;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
       if (event.pairs[0].bodyB.label === 'fiveBumper'){
-        console.log("5");
+        // console.log("5");
+        gameState.score = gameState.score + 5;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
+      //console.log(gameState.score)
+      gameState.scoreDisplay.setText('Score: ' + gameState.score);
     });
   }
 

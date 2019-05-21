@@ -2,6 +2,7 @@ const gameState = {
   onColor: 0xaaffaa,
   offColor: 0xffaaaa,
   score: 0,
+  scoreDisplay: '',
 };
 
 const config = {
