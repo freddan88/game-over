@@ -3,6 +3,8 @@ const gameState = {
   offColor: 0xffaaaa,
   score: 0,
   scoreDisplay: '',
+  lives: 3,
+  gameOver: false
 };
 
 const config = {
