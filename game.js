@@ -1,6 +1,4 @@
 const gameState = {
-  onColor: 0xaaffaa,
-  offColor: 0xffaaaa,
   score: 0,
 };
 
@@ -13,8 +11,8 @@ const config = {
   physics: {
     default: 'matter',
     matter: {
-      gravity: { y: 0.5 },
-      debug: false,
+      gravity: { y: 0.4 },
+      debug: true,
       enableBody: true,
     }
   }
