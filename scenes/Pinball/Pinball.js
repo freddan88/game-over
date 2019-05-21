@@ -6,7 +6,9 @@ class Pinball extends Phaser.Scene {
   preload() {
     this.load.image('flipperPaddleR', 'assets/sprites/flipperPaddle.png');
     this.load.image('flipperPaddleL', 'assets/sprites/flipperPaddle.png');
-    this.load.image('ball', 'assets/sprites/ball.png');
+    this.load.image('stoppers', 'assets/sprites/stoppers.png');
+    this.load.image('playball', 'assets/sprites/playball.png');
+    this.load.image('launcher', 'assets/sprites/launcher.png');
     this.load.json('shapes', 'assets/game-area-sprites/game-area.json');
     this.load.atlas('sheet', 'assets/game-area-sprites/game-area-sprites.png', 'assets/game-area-sprites/game-area-sprites.json');
   }
@@ -31,23 +33,26 @@ class Pinball extends Phaser.Scene {
       pointB: { x: 50, y: 0 },
     });
 
-    this.matter.add.image(320, 660, 'ball')
+    this.matter.add.image(320, 660, 'stoppers')
     .setFriction(0)
     .setScale(1.3)
     .setCircle(10)
     .setStatic(true)
 
-    this.matter.add.image(60, 660, 'ball')
+    this.matter.add.image(60, 660, 'stoppers')
     .setFriction(0)
     .setScale(1.3)
     .setCircle(10)
     .setStatic(true)
 
-    gameState.ball = this.matter.add.image(300, 200, 'ball')
+    gameState.launcher = this.matter.add.image(386.5, 680, 'launcher')
+    .setFriction(0)
+    .setStatic(true)
+
+    gameState.ball = this.matter.add.image(386, 650, 'playball')
     .setFrictionAir(0)
     .setFriction(0)
-    .setScale(1.2)
-    .setCircle(10)
+    .setCircle()
     gameState.ball.body.restitution = 0.5;
 
     gameState.topDome = this.matter.add.image(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome})
@@ -85,6 +90,8 @@ class Pinball extends Phaser.Scene {
     .setStatic(true)
     gameState.fiveBumper.body.label = 'fiveBumper';
 
+    this.add.rectangle(386, 691, 30, 100, 0xC4C4C4);
+
     this.matter.world.on('collisionstart', function (event) {
       if (event.pairs[0].bodyB.label === 'twentyBumper'){
         console.log("20");
@@ -108,15 +115,20 @@ class Pinball extends Phaser.Scene {
   update() {
     if (gameState.cursors.left.isDown) {
       gameState.flipperPaddleL.setVelocityY(-25)
-    }
-    if (gameState.cursors.left.isUp) {
+    } else {
       gameState.flipperPaddleL.setVelocityY(5)
     }
+
     if (gameState.cursors.right.isDown) {
       gameState.flipperPaddleR.setVelocityY(-25)
-    }
-    if (gameState.cursors.right.isUp) {
+    } else {
       gameState.flipperPaddleR.setVelocityY(5)
+    }
+
+    if (gameState.cursors.space.isDown) {
+      gameState.launcher.setVelocityY(-15)
+    } else {
+      gameState.launcher.setVelocityY(0)
     }
   }
 }
