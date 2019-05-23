@@ -1,7 +1,9 @@
 const gameState = {
-  onColor: 0xaaffaa,
-  offColor: 0xffaaaa,
   score: 0,
+  scoreDisplay: '',
+  lives: 3,
+  livesDisplay: '',
+  gameOver: false
 };
 
 const config = {
@@ -9,12 +11,12 @@ const config = {
   height: 720,
   backgroundColor: 0X000000,
   title: 'WU18 - DinoBall',
-  scene: [Pinball],
+  scene: [Pinball, Gameover],
   physics: {
     default: 'matter',
     matter: {
       gravity: { y: 0.5 },
-      debug: true,
+      debug: false,
       enableBody: true,
     }
   }
