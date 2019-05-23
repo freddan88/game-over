@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "spriteSheet.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 442,
+				"h": 244
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "shapeTop.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 440,
+						"h": 100
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 440,
+						"h": 100
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 440,
+						"h": 100
+					}
+				},
+				{
+					"filename": "shapeBumperL.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 143,
+						"h": 140
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 143,
+						"h": 140
+					},
+					"frame": {
+						"x": 1,
+						"y": 103,
+						"w": 143,
+						"h": 140
+					}
+				},
+				{
+					"filename": "shapeBumperR.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 143,
+						"h": 140
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 143,
+						"h": 140
+					},
+					"frame": {
+						"x": 146,
+						"y": 103,
+						"w": 143,
+						"h": 140
+					}
+				},
+				{
+					"filename": "shapeBumperLW.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 38,
+						"h": 119
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 38,
+						"h": 119
+					},
+					"frame": {
+						"x": 291,
+						"y": 103,
+						"w": 38,
+						"h": 119
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:250bce537e194662e5a20399ab941860:2a46bf4fe36288fde474e95ee7c50001:7e9cba42a24ab13bb2e5b759134e4728$"
+	}
+}
