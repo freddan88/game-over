@@ -179,7 +179,12 @@ class Pinball extends Phaser.Scene {
       gameState.ball.body.restitution = 0.5;
       gameState.blocker.y = 125;
     } else if(gameState.lives <= 0){
-      //this.scene.stop('Pinball');
+      this.scene.stop('Pinball');
+
+      this.scene.transition({
+        target: "Gameover",
+        duration: 1000
+      });
     }
   }
 }
