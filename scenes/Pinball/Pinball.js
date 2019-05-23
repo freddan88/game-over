@@ -4,132 +4,112 @@ class Pinball extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('flipperPaddleR', 'assets/sprites/flipperPaddle.png');
-    this.load.image('flipperPaddleL', 'assets/sprites/flipperPaddle.png');
-    this.load.image('stoppers', 'assets/sprites/stoppers.png');
-    this.load.image('playball', 'assets/sprites/playball.png');
-    this.load.image('launcher', 'assets/sprites/launcher.png');
-    this.load.image('blocker', 'assets/sprites/blocker.png');
-    this.load.json('shapes', 'assets/game-area-sprites/game-area.json');
-    this.load.atlas('sheet', 'assets/game-area-sprites/game-area-sprites.png', 'assets/game-area-sprites/game-area-sprites.json');
+    this.load.image('ball', 'assets/sprites/ball.png');
+    this.load.image('gameWall', 'assets/sprites/wall.png');
+    this.load.image('gameCeiling', 'assets/sprites/topWall.png');
+    this.load.image('launcherWall', 'assets/sprites/launcherWall.png');
+    this.load.image('launcherSpring', 'assets/sprites/launcherSpring.png');
+    this.load.image('bodyBackground', 'assets/sprites/bodyBackground.png');
+    this.load.image('flipperPaddle', 'assets/sprites/flipperPaddle.png');
+    this.load.image('scoreCircle', 'assets/sprites/scoreCircle.png');
+    this.load.json('shapes', 'assets/sprites/spriteShapes.json');
+    this.load.atlas('sheet', 'assets/sprites/spriteSheet.png', 'assets/sprites/spriteAtlas.json');
+    this.load.image('launcherBlocker', 'assets/sprites/launcherBlocker.png');
+    this.load.image('image', 'assets/sprites/image.png');
   }
 
   create() {
     const shapes = this.cache.json.get('shapes');
     gameState.cursors = this.input.keyboard.createCursorKeys();
-    this.matter.world.setBounds(0, 0, 400, 800, 1, true, true, true, false);
+    this.matter.world.setBounds(0, 0, 440, 720, 1, true, true, true, false);
 
-    gameState.flipperPaddleR = this.matter.add.image(315, 665, 'flipperPaddleR')
-    .setFrictionAir(0.25)
+    // Add Images to world
+    this.add.image(0, 0, 'bodyBackground').setOrigin(0,0);
+    this.matter.add.image(10, 370, 'gameWall').setStatic(true);
+    this.matter.add.image(430, 370, 'gameWall').setStatic(true);
+    this.matter.add.image(220, 10, 'gameCeiling').setStatic(true);
+    this.matter.add.image(384, 430, 'launcherWall').setStatic(true);
+    this.add.image(210, 500, 'image');
+
+    // Add Shapes to world
+    this.matter.add.image(37, 350, 'sheet', 'shapeBumperLW.png', {shape: shapes.shapeBumperLW});
+    this.matter.add.image(70, 672, 'sheet', 'shapeBumperL.png', {shape: shapes.shapeBumperL});
+    this.matter.add.image(325, 672, 'sheet', 'shapeBumperR.png', {shape: shapes.shapeBumperR});
+    this.matter.add.image(220, 35, 'sheet', 'shapeTop.png', {shape: shapes.shapeTop});
+
+    // Add main ball to game
+    gameState.ball = this.matter.add.image(406, 560, 'ball').setFrictionAir(0).setFriction(0).setCircle();
+    gameState.ball.body.label = 'playball';
+    gameState.ball.body.restitution = 0.6;
+
+    // Add main flipperpaddles to game
+    gameState.flipperPaddleR = this.matter.add.image(317, 630, 'flipperPaddle').setFrictionAir(0.25)
     gameState.flipperPaddleR.body.label = 'flipperPaddleR'
     this.matter.add.worldConstraint(gameState.flipperPaddleR, 0, 0, {
-      pointA: { x: 310, y: 670 },
+      pointA: { x: 325, y: 625},
       pointB: { x: 50, y: 0 },
     });
 
-    gameState.flipperPaddleL = this.matter.add.image(100, 600, 'flipperPaddleL')
-    .setFrictionAir(0.25)
-    .setPosition(0,0)
+    gameState.flipperPaddleL = this.matter.add.image(80, 625, 'flipperPaddle').setFrictionAir(0.25).setPosition(0,0)
     gameState.flipperPaddleL.body.label = 'flipperPaddleL'
     this.matter.add.worldConstraint(gameState.flipperPaddleL, 0, 0, {
-      pointA: { x: 70, y: 670 },
+      pointA: { x: 68, y: 625 },
       pointB: { x: 50, y: 0 },
     });
 
-    this.matter.add.image(320, 660, 'stoppers')
-    .setFriction(0)
-    .setScale(1.3)
-    .setCircle(10)
-    .setStatic(true)
+    // Add sprites with actions to game
+    gameState.launcher = this.matter.add.image(407, 660, 'launcherSpring').setStatic(true);
+    gameState.scoreDisplay = this.add.text(20 , 20, 'score:', { fontSize: '16px', fill: '#000' });
 
-    this.matter.add.image(60, 660, 'stoppers')
-    .setFriction(0)
-    .setScale(1.3)
-    .setCircle(10)
-    .setStatic(true)
-
-    // gameState.blocker = this.matter.add.image(386.5, 225, 'blocker')
-    gameState.blocker = this.matter.add.image(386.5, 125, 'blocker')
-    .setFriction(0)
-    .setStatic(true)
-    // .visible = false
-
-    gameState.launcher = this.matter.add.image(386.5, 680, 'launcher')
-    .setFriction(0)
-    .setStatic(true)
-
-    gameState.ball = this.matter.add.image(386, 650, 'playball')
-    .setFrictionAir(0)
-    .setFriction(0)
-    .setCircle()
-    gameState.ball.body.label = 'playball'
-    gameState.ball.body.restitution = 0.5;
-
-
-    gameState.topDome = this.matter.add.image(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome})
-    gameState.topDome.body.label = 'topDome';
-    gameState.scoreDisplay = this.add.text(20 , 20, 'score: 0', { fontSize: '16px', fill: '#000' });
-
-    gameState.leftSideBumper = this.matter.add.image(20, 480, 'sheet', 'left_side_bumper', {shape: shapes.left_side_bumper})
-    gameState.leftSideBumper.body.label = 'leftSideBumper';
-
-    gameState.ballShootWall = this.matter.add.image(370, 500, 'sheet', 'ball_shoot_wall', {shape: shapes.ball_shoot_wall})
-    gameState.ballShootWall.body.label = 'ballShootWall';
-
-    gameState.leftBumper = this.matter.add.image(330, 700, 'sheet', 'right_bumper', {shape: shapes.right_bumper})
-    gameState.leftBumper.body.label = 'leftBumper';
-
-    gameState.rightBumper = this.matter.add.image(50, 700, 'sheet', 'left_bumper', {shape: shapes.left_bumper})
-    gameState.rightBumper.body.label = 'rightBumper';
-
-    gameState.twentyBumper = this.matter.add.image(180, 250, 'sheet', '20_bumper', {shape: shapes.twenty_bumper})
-    .setCircle(25)
-    .setStatic(true)
+    gameState.launcherBlocker = this.matter.add.image(407, 20, 'launcherBlocker').setStatic(true);
+    gameState.launcherBlocker.body.label = 'launcherBlocker';
+    
+    gameState.twentyBumper = this.matter.add.image(220, 180, 'scoreCircle').setCircle(25).setFriction(0).setStatic(true);
     gameState.twentyBumper.body.label = 'twentyBumper';
+    gameState.twentyBumper.body.frictionStatic = 0;
 
-    gameState.fifteenBumper = this.matter.add.image(100, 320, 'sheet', '15_bumper', {shape: shapes.fifteen_bumper})
-    .setCircle(25)
-    .setStatic(true)
+    gameState.fifteenBumper = this.matter.add.image(120, 280, 'scoreCircle').setCircle(25).setFriction(0).setStatic(true);
     gameState.fifteenBumper.body.label = 'fifteenBumper';
+    gameState.twentyBumper.body.frictionStatic = 0;
 
-    gameState.tenBumper = this.matter.add.image(290, 300, 'sheet', '10_bumper', {shape: shapes.ten_bumper})
-    .setCircle(25)
-    .setStatic(true)
+    gameState.tenBumper = this.matter.add.image(300, 280, 'scoreCircle').setCircle(25).setFriction(0).setStatic(true);
     gameState.tenBumper.body.label = 'tenBumper';
+    gameState.twentyBumper.body.frictionStatic = 0;
 
-    gameState.fiveBumper = this.matter.add.image(210, 370, 'sheet', '5_bumper', {shape: shapes.five_bumper})
-    .setCircle(25)
-    .setStatic(true)
+    gameState.fiveBumper = this.matter.add.image(210, 360, 'scoreCircle').setCircle(25).setFriction(0).setStatic(true);
     gameState.fiveBumper.body.label = 'fiveBumper';
+    gameState.twentyBumper.body.frictionStatic = 0;
 
-    this.add.rectangle(386, 691, 30, 100, 0xC4C4C4);
-
+    // Check for collisions
     this.matter.world.on('collisionstart', function (event) {
       if (event.pairs[0].bodyB.label === 'twentyBumper'){
-        gameState.blocker.y = 225;
+        gameState.launcherBlocker.y = 150;
         gameState.score = gameState.score + 20;
-        event.pairs[0].bodyA.gameObject.setVelocityY(-25);
+        event.pairs[0].bodyA.gameObject.setVelocityY(-8);
       }
       if (event.pairs[0].bodyB.label === 'fifteenBumper'){
-        gameState.blocker.y = 225;
+        gameState.launcherBlocker.y = 150;
         gameState.score = gameState.score + 15;
-        event.pairs[0].bodyA.gameObject.setVelocityY(-25);
+        event.pairs[0].bodyA.gameObject.setVelocityY(-8);
       }
       if (event.pairs[0].bodyB.label === 'tenBumper'){
-        gameState.blocker.y = 225;
+        gameState.launcherBlocker.y = 150;
         gameState.score = gameState.score + 10;
-        event.pairs[0].bodyA.gameObject.setVelocityY(-25);
+        event.pairs[0].bodyA.gameObject.setVelocityY(-8);
       }
       if (event.pairs[0].bodyB.label === 'fiveBumper'){
-        gameState.blocker.y = 225;
+        gameState.launcherBlocker.y = 150;
         gameState.score = gameState.score + 5;
-        event.pairs[0].bodyA.gameObject.setVelocityY(-25);
+        event.pairs[0].bodyA.gameObject.setVelocityY(-10);
+      }
+      if (event.pairs[0].bodyB.label === 'launcherBlocker'){
+        event.pairs[0].bodyA.gameObject.setVelocityX(-10);
       }
       if ((event.pairs[0].bodyB.label === 'flipperPaddleL' && event.pairs[0].bodyA.label === 'playball') || (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleL')){
-        gameState.blocker.y = 225;
+        gameState.launcherBlocker.y = 150;
       }
       if ((event.pairs[0].bodyB.label === 'flipperPaddleR' && event.pairs[0].bodyA.label === 'playball') || (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleR')){
-        gameState.blocker.y = 225;
+        gameState.launcherBlocker.y = 150;
       }
       gameState.scoreDisplay.setText('Score: ' + gameState.score);
     });
@@ -137,15 +117,15 @@ class Pinball extends Phaser.Scene {
 
   update() {
     if (gameState.cursors.left.isDown) {
-      gameState.flipperPaddleL.setVelocityY(-25)
+      gameState.flipperPaddleL.setVelocityY(-15)
     } else {
-      gameState.flipperPaddleL.setVelocityY(5)
+      gameState.flipperPaddleL.setVelocityY(10)
     }
 
     if (gameState.cursors.right.isDown) {
-      gameState.flipperPaddleR.setVelocityY(-25)
+      gameState.flipperPaddleR.setVelocityY(-15)
     } else {
-      gameState.flipperPaddleR.setVelocityY(5)
+      gameState.flipperPaddleR.setVelocityY(10)
     }
 
     if (gameState.cursors.space.isDown || gameState.cursors.down.isDown) {
