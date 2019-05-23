@@ -1,8 +1,6 @@
 const gameState = {
   score: 0,
-  scoreDisplay: '',
   lives: 1,
-  livesDisplay: '',
   gameOver: false
 };
 
@@ -16,7 +14,7 @@ const config = {
     default: 'matter',
     matter: {
       gravity: { y: 0.4 },
-      debug: true,
+      debug: false,
       enableBody: true,
     }
   }
