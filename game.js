@@ -8,7 +8,7 @@ const config = {
   height: 800,
   backgroundColor: 0X000000,
   title: 'WU18 - DinoBall',
-  scene: [Pinball],
+  scene: [Gameover],
   physics: {
     default: 'matter',
     matter: {
