@@ -113,44 +113,32 @@ class Pinball extends Phaser.Scene {
         gameState.blocker.y = 225;
         gameState.score = gameState.score + 20;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
-
-        console.log('collision20');
-
       }
       if ((event.pairs[0].bodyB.label === 'fifteenBumper' && event.pairs[0].bodyA.label === 'playball') ||
       (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'fifteenBumper')){
         gameState.blocker.y = 225;
         gameState.score = gameState.score + 15;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
-        console.log('collision15');
-
       }
       if ((event.pairs[0].bodyB.label === 'tenBumper' && event.pairs[0].bodyA.label === 'playball') ||
       (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'tenBumper')){
         gameState.blocker.y = 225;
         gameState.score = gameState.score + 10;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
-        console.log('collision10');
-
       }
       if ((event.pairs[0].bodyB.label === 'fiveBumper' && event.pairs[0].bodyA.label === 'playball') ||
       (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'fiveBumper')){
         gameState.blocker.y = 225;
         gameState.score = gameState.score + 5;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
-        console.log('collision5');
-
       }
       if ((event.pairs[0].bodyB.label === 'flipperPaddleL' && event.pairs[0].bodyA.label === 'playball') ||
       (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleL')){
         gameState.blocker.y = 225;
-        console.log('collisionLeft');
-
       }
-      if ((event.pairs[0].bodyB.label === 'flipperPaddleR' && event.pairs[0].bodyA.label === 'playball') || (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleR')){
+      if ((event.pairs[0].bodyB.label === 'flipperPaddleR' && event.pairs[0].bodyA.label === 'playball') ||
+      (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleR')){
         gameState.blocker.y = 225;
-        console.log('collisionRight');
-
       }
       gameState.scoreDisplay.setText('Score: ' + gameState.score);
     });
@@ -177,13 +165,11 @@ class Pinball extends Phaser.Scene {
 
     if(gameState.ball.y > 800 && gameState.lives >= 1 ){
 
-      console.log('gone');
       gameState.lives = gameState.lives -= 1;
       gameState.livesDisplay.setText('Lives: ' + gameState.lives);
 
       //gameState.score = gameState.score;
       gameState.scoreDisplay.setText('Score: '+ gameState.score)
-      console.log(gameState.score);
 
       gameState.ball = this.matter.add.image(386, 650, 'playball')
       .setFrictionAir(0)
