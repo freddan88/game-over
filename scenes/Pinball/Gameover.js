@@ -4,6 +4,7 @@ class Gameover extends Phaser.Scene {
   }
 
   create(){
+
     gameState.gameOverMessage = this.add.text(200, 300, 'Game Over!', {
       font: "40px",
       align: 'center',
@@ -15,6 +16,12 @@ class Gameover extends Phaser.Scene {
       align: 'center',
     });
     gameState.playAgainMessage.setOrigin(0.5);
+  }
+
+  update(){
+    if (this.cursors.enter.isDown) {
+      gameState.scene.start('Pinball');
+    }
   }
 
 }
