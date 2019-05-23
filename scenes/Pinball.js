@@ -15,13 +15,13 @@ class Pinball extends Phaser.Scene {
     this.load.image('gameCeiling', 'assets/sprites/topWall.png');
     this.load.image('launcherWall', 'assets/sprites/launcherWall.png');
     this.load.image('launcherSpring', 'assets/sprites/launcherSpring.png');
-    this.load.image('bodyBackground', 'assets/sprites/bodyBackground.png');
     this.load.image('flipperPaddle', 'assets/sprites/flipperPaddle.png');
     this.load.image('scoreCircle', 'assets/sprites/scoreCircle.png');
     this.load.json('shapes', 'assets/sprites/spriteShapes.json');
     this.load.atlas('sheet', 'assets/sprites/spriteSheet.png', 'assets/sprites/spriteAtlas.json');
     this.load.image('launcherBlocker', 'assets/sprites/launcherBlocker.png');
-    this.load.image('image', 'assets/sprites/image.png');
+    this.load.image('bodyBackground', 'assets/images/bodyBackground.png');
+    this.load.image('image', 'assets/images/image.png');
   }
   
   create() {
