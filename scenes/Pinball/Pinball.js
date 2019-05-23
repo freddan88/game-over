@@ -145,41 +145,49 @@ class Pinball extends Phaser.Scene {
   }
 
   update() {
-    if (gameState.cursors.left.isDown) {
-      gameState.flipperPaddleL.setVelocityY(-25)
-    } else {
-      gameState.flipperPaddleL.setVelocityY(5)
-    }
+    if(gameState.gameOver == false){
+      if (gameState.cursors.left.isDown) {
+        gameState.flipperPaddleL.setVelocityY(-25)
+      } else {
+        gameState.flipperPaddleL.setVelocityY(5)
+      }
 
-    if (gameState.cursors.right.isDown) {
-      gameState.flipperPaddleR.setVelocityY(-25)
-    } else {
-      gameState.flipperPaddleR.setVelocityY(5)
-    }
+      if (gameState.cursors.right.isDown) {
+        gameState.flipperPaddleR.setVelocityY(-25)
+      } else {
+        gameState.flipperPaddleR.setVelocityY(5)
+      }
 
-    if (gameState.cursors.space.isDown || gameState.cursors.down.isDown) {
-      gameState.launcher.setVelocityY(-15)
-    } else {
-      gameState.launcher.setVelocityY(0)
-    }
+      if (gameState.cursors.space.isDown || gameState.cursors.down.isDown) {
+        gameState.launcher.setVelocityY(-15)
+        } else {
+          gameState.launcher.setVelocityY(0)
+        }
 
-    if(gameState.ball.y > 800 && gameState.lives >= 1 ){
 
-      gameState.lives = gameState.lives -= 1;
-      gameState.livesDisplay.setText('Lives: ' + gameState.lives);
+      if(gameState.ball.y > 800 && gameState.lives >= 1 ){
 
-      //gameState.score = gameState.score;
-      gameState.scoreDisplay.setText('Score: '+ gameState.score)
+        gameState.lives = gameState.lives -= 1;
+        gameState.livesDisplay.setText('Lives: ' + gameState.lives);
 
-      gameState.ball = this.matter.add.image(386, 650, 'playball')
-      .setFrictionAir(0)
-      .setFriction(0)
-      .setCircle()
-      gameState.ball.body.label = 'playball'
-      gameState.ball.body.restitution = 0.5;
-      gameState.blocker.y = 125;
-    } else if(gameState.lives <= 0){
-      //this.scene.stop('Pinball');
+        gameState.scoreDisplay.setText('Score: '+ gameState.score)
+
+        gameState.ball = this.matter.add.image(386, 650, 'playball')
+        .setFrictionAir(0)
+        .setFriction(0)
+        .setCircle()
+        gameState.ball.body.label = 'playball'
+        gameState.ball.body.restitution = 0.5;
+        gameState.blocker.y = 125;
+
+      } else if(gameState.lives <= 0){
+        gameState.gameOver = true;
+        this.scene.stop('Pinball');
+        this.scene.transition({
+          target: "Gameover",
+          duration: 100
+        });
+      }
     }
   }
 }
