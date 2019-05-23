@@ -3,6 +3,7 @@ class Pinball extends Phaser.Scene {
     super({ key: 'Pinball' });
   }
 
+
   preload() {
     this.load.image('flipperPaddleR', 'assets/sprites/flipperPaddle.png');
     this.load.image('flipperPaddleL', 'assets/sprites/flipperPaddle.png');
@@ -17,7 +18,7 @@ class Pinball extends Phaser.Scene {
   create() {
     const shapes = this.cache.json.get('shapes');
     gameState.cursors = this.input.keyboard.createCursorKeys();
-    this.matter.world.setBounds(0, 0, 400, 800, 1, true, true, true, false);
+    this.matter.world.setBounds(0, 145, 398, 780, 200, true, true, true, false);
 
     gameState.flipperPaddleR = this.matter.add.image(315, 665, 'flipperPaddleR')
     .setFrictionAir(0.25)
@@ -68,12 +69,14 @@ class Pinball extends Phaser.Scene {
 
     gameState.topDome = this.matter.add.image(200, 80, 'sheet', 'top_dome', {shape: shapes.top_dome})
     gameState.topDome.body.label = 'topDome';
-    gameState.scoreDisplay = this.add.text(20 , 20, 'score: 0', { fontSize: '16px', fill: '#000' });
+    gameState.scoreDisplay = this.add.text(20 , 20, 'Score: ' + gameState.score, { fontSize: '16px', fill: '#000' });
+    gameState.livesDisplay = this.add.text(300 , 20, 'Lives: 3', { fontSize: '16px', fill: '#000' });
 
     gameState.leftSideBumper = this.matter.add.image(20, 480, 'sheet', 'left_side_bumper', {shape: shapes.left_side_bumper})
     gameState.leftSideBumper.body.label = 'leftSideBumper';
 
     gameState.ballShootWall = this.matter.add.image(370, 500, 'sheet', 'ball_shoot_wall', {shape: shapes.ball_shoot_wall})
+    .setMass(1)
     gameState.ballShootWall.body.label = 'ballShootWall';
 
     gameState.leftBumper = this.matter.add.image(330, 700, 'sheet', 'right_bumper', {shape: shapes.right_bumper})
@@ -105,30 +108,36 @@ class Pinball extends Phaser.Scene {
     this.add.rectangle(386, 691, 30, 100, 0xC4C4C4);
 
     this.matter.world.on('collisionstart', function (event) {
-      if (event.pairs[0].bodyB.label === 'twentyBumper'){
+      if ((event.pairs[0].bodyB.label === 'twentyBumper' && event.pairs[0].bodyA.label === 'playball') ||
+      (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'twentyBumper')){
         gameState.blocker.y = 225;
         gameState.score = gameState.score + 20;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
-      if (event.pairs[0].bodyB.label === 'fifteenBumper'){
+      if ((event.pairs[0].bodyB.label === 'fifteenBumper' && event.pairs[0].bodyA.label === 'playball') ||
+      (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'fifteenBumper')){
         gameState.blocker.y = 225;
         gameState.score = gameState.score + 15;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
-      if (event.pairs[0].bodyB.label === 'tenBumper'){
+      if ((event.pairs[0].bodyB.label === 'tenBumper' && event.pairs[0].bodyA.label === 'playball') ||
+      (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'tenBumper')){
         gameState.blocker.y = 225;
         gameState.score = gameState.score + 10;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
-      if (event.pairs[0].bodyB.label === 'fiveBumper'){
+      if ((event.pairs[0].bodyB.label === 'fiveBumper' && event.pairs[0].bodyA.label === 'playball') ||
+      (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'fiveBumper')){
         gameState.blocker.y = 225;
         gameState.score = gameState.score + 5;
         event.pairs[0].bodyA.gameObject.setVelocityY(-25);
       }
-      if ((event.pairs[0].bodyB.label === 'flipperPaddleL' && event.pairs[0].bodyA.label === 'playball') || (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleL')){
+      if ((event.pairs[0].bodyB.label === 'flipperPaddleL' && event.pairs[0].bodyA.label === 'playball') ||
+      (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleL')){
         gameState.blocker.y = 225;
       }
-      if ((event.pairs[0].bodyB.label === 'flipperPaddleR' && event.pairs[0].bodyA.label === 'playball') || (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleR')){
+      if ((event.pairs[0].bodyB.label === 'flipperPaddleR' && event.pairs[0].bodyA.label === 'playball') ||
+      (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'flipperPaddleR')){
         gameState.blocker.y = 225;
       }
       gameState.scoreDisplay.setText('Score: ' + gameState.score);
@@ -152,6 +161,25 @@ class Pinball extends Phaser.Scene {
       gameState.launcher.setVelocityY(-15)
     } else {
       gameState.launcher.setVelocityY(0)
+    }
+
+    if(gameState.ball.y > 800 && gameState.lives >= 1 ){
+
+      gameState.lives = gameState.lives -= 1;
+      gameState.livesDisplay.setText('Lives: ' + gameState.lives);
+
+      //gameState.score = gameState.score;
+      gameState.scoreDisplay.setText('Score: '+ gameState.score)
+
+      gameState.ball = this.matter.add.image(386, 650, 'playball')
+      .setFrictionAir(0)
+      .setFriction(0)
+      .setCircle()
+      gameState.ball.body.label = 'playball'
+      gameState.ball.body.restitution = 0.5;
+      gameState.blocker.y = 125;
+    } else if(gameState.lives <= 0){
+      //this.scene.stop('Pinball');
     }
   }
 }
