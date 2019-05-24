@@ -19,7 +19,8 @@ _HTML, Javascript, [Phaser.js](https://phaser.io "Phaser.js"), Markdown <- Readm
 - [#5 Add lives functionality](https://github.com/freddan88/game-over/pull/9)
 - [#6 Add game over scene](https://github.com/freddan88/game-over/pull/10)
 - [#7 Update gameplan](https://github.com/freddan88/game-over/pull/11)
-- [#8 Add soundeffects](https://github.com/freddan88/game-over/pull/12)
+- [#8 Add sound effects](https://github.com/freddan88/game-over/pull/12)
+- [#9 Add color effects](https://github.com/freddan88/game-over/pull/14/)
 
 ### Usage
 If you would like to play the game locally you can download or [clone](https://github.com/freddan88/game-over.git) the repository to your machine. To open the game you'll need to start a local server and point it to the root af the repository. Then open a browser and go to your server-adress and play away.
