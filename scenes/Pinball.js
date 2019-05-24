@@ -16,19 +16,16 @@ class Pinball extends Phaser.Scene {
     this.load.image('scoreCircle', 'assets/sprites/scoreCircle.png');
     this.load.image('launcherWall', 'assets/sprites/launcherWall.png');
     this.load.image('flipperPaddle', 'assets/sprites/flipperPaddle.png');
-    this.load.image('bodyBackground', 'assets/images/bodyBackground.png');
-    this.load.image('launcherSpring', 'assets/sprites/launcherSpring.png');
     this.load.image('launcherBlocker', 'assets/sprites/launcherBlocker.png');
+    this.load.image('launcherSpring', 'assets/sprites/launcherSpring.png');
+    this.load.image('bodyBackground', 'assets/images/bodyBackground.png');
     this.load.image('image', 'assets/images/image.png');
-
     this.load.json('shapes', 'assets/sprites/spriteShapes.json');
-
     this.load.atlas('sheet', 'assets/sprites/spriteSheet.png', 'assets/sprites/spriteAtlas.json');
-
-    this.load.audio('rawr', 'assets/sounds/Monster2.wav');
     // this.load.audio('roar', 'assets/sounds/Monster03.wav');
     // this.load.audio('snarl', 'assets/sounds/Monster01.wav');
     // this.load.audio('growl', 'assets/sounds/growl_01.flac');
+    this.load.audio('rawr', 'assets/sounds/Monster2.wav');
     this.load.audio('music', 'assets/sounds/GameMusic2.ogg');
   }
 
@@ -58,11 +55,11 @@ class Pinball extends Phaser.Scene {
     // Add main ball to game
     this.spawnBall();
 
-    // this.sound.play('music', {
-    //   loop:true,
-    //   volume: 2
-    // });
-
+    this.sound.play('music', {
+      loop:true,
+      volume: 2
+    });
+  
     // Add main flipperpaddles to game
     gameState.flipperPaddleR = this.matter.add.image(325, 625, 'flipperPaddle').setFrictionAir(0.25)
     gameState.flipperPaddleR.body.label = 'flipperPaddleR'
@@ -88,20 +85,24 @@ class Pinball extends Phaser.Scene {
     gameState.scoreDisplay = this.add.text(20 , 20, 'Score: ' + gameState.score, { fontSize: '16px', fill: '#000' });
 
     gameState.twentyBumper = this.matter.add.image(220, 180, 'scoreCircle').setCircle(25).setFriction(0).setStatic(true);
+    gameState.twentyBumper.body.gameObject.name = 'scoreCircle'
     gameState.twentyBumper.body.label = 'twentyBumper';
     gameState.twentyBumper.body.frictionStatic = 0;
 
     gameState.fifteenBumper = this.matter.add.image(120, 270, 'scoreCircle').setCircle(25).setFriction(0).setStatic(true);
+    gameState.fifteenBumper.body.gameObject.name = 'scoreCircle'
     gameState.fifteenBumper.body.label = 'fifteenBumper';
-    gameState.twentyBumper.body.frictionStatic = 0;
+    gameState.fifteenBumper.body.frictionStatic = 0;
 
     gameState.tenBumper = this.matter.add.image(300, 280, 'scoreCircle').setCircle(25).setFriction(0).setStatic(true);
+    gameState.tenBumper.body.gameObject.name = 'scoreCircle'
     gameState.tenBumper.body.label = 'tenBumper';
-    gameState.twentyBumper.body.frictionStatic = 0;
+    gameState.tenBumper.body.frictionStatic = 0;
 
     gameState.fiveBumper = this.matter.add.image(210, 360, 'scoreCircle').setCircle(25).setFriction(0).setStatic(true);
+    gameState.fiveBumper.body.gameObject.name = 'scoreCircle'
     gameState.fiveBumper.body.label = 'fiveBumper';
-    gameState.twentyBumper.body.frictionStatic = 0;
+    gameState.fiveBumper.body.frictionStatic = 0;
 
     this.add.rectangle(410, 660, 70, 125, 0x998354);
 
@@ -115,31 +116,34 @@ class Pinball extends Phaser.Scene {
       blockerPositionY();
     }
 
-
-    // Check for collisions
+    // Check collisions starts
     this.matter.world.on('collisionstart', function (event) {
       if ((event.pairs[0].bodyB.label === 'twentyBumper' && event.pairs[0].bodyA.label === 'playball') ||
       (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'twentyBumper')){
         bumperCollisionActions(20, -5, event);
-        //this.sound.play('rawr');
+        event.pairs[0].bodyB.gameObject.name === 'scoreCircle' ? event.pairs[0].bodyB.gameObject.setTint(0xfce8be) : '';
+        event.pairs[0].bodyA.gameObject.name === 'scoreCircle' ? event.pairs[0].bodyA.gameObject.setTint(0xfce8be) : '';
       }
 
       if ((event.pairs[0].bodyB.label === 'fifteenBumper' && event.pairs[0].bodyA.label === 'playball') ||
       (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'fifteenBumper')){
         bumperCollisionActions(15, -10, event);
-        //this.sound.play('rawr');
+        event.pairs[0].bodyB.gameObject.name === 'scoreCircle' ? event.pairs[0].bodyB.gameObject.setTint(0xfce8be) : '';
+        event.pairs[0].bodyA.gameObject.name === 'scoreCircle' ? event.pairs[0].bodyA.gameObject.setTint(0xfce8be) : '';
       }
 
       if ((event.pairs[0].bodyB.label === 'tenBumper' && event.pairs[0].bodyA.label === 'playball') ||
       (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'tenBumper')){
         bumperCollisionActions(10, -10, event);
-        //this.sound.play('rawr');
+        event.pairs[0].bodyB.gameObject.name === 'scoreCircle' ? event.pairs[0].bodyB.gameObject.setTint(0xfce8be) : '';
+        event.pairs[0].bodyA.gameObject.name === 'scoreCircle' ? event.pairs[0].bodyA.gameObject.setTint(0xfce8be) : '';
       }
 
       if ((event.pairs[0].bodyB.label === 'fiveBumper' && event.pairs[0].bodyA.label === 'playball') ||
       (event.pairs[0].bodyB.label === 'playball' && event.pairs[0].bodyA.label === 'fiveBumper')){
         bumperCollisionActions(5, -10, event);
-        //this.sound.play('rawr');
+        event.pairs[0].bodyB.gameObject.name === 'scoreCircle' ? event.pairs[0].bodyB.gameObject.setTint(0xfce8be) : '';
+        event.pairs[0].bodyA.gameObject.name === 'scoreCircle' ? event.pairs[0].bodyA.gameObject.setTint(0xfce8be) : '';
       }
 
       if ((event.pairs[0].bodyB.label === 'flipperPaddleL' && event.pairs[0].bodyA.label === 'playball') ||
@@ -152,6 +156,21 @@ class Pinball extends Phaser.Scene {
         blockerPositionY();
       }
       gameState.scoreDisplay.setText('Score: ' + gameState.score);
+    });
+
+    // Check collisions ends
+    this.matter.world.on('collisionend', function (event, bodyA, bodyB) {
+      bodyB.label === 'fiveBumper' ? bodyB.gameObject.setTint() : '';
+      bodyA.label === 'fiveBumper' ? bodyA.gameObject.setTint() : '';
+
+      bodyB.label === 'tenBumper' ? bodyB.gameObject.setTint() : '';
+      bodyA.label === 'tenBumper' ? bodyA.gameObject.setTint() : '';
+
+      bodyB.label === 'fifteenBumper' ? bodyB.gameObject.setTint() : '';
+      bodyA.label === 'fifteenBumper' ? bodyA.gameObject.setTint() : '';
+
+      bodyB.label === 'twentyBumper' ? bodyB.gameObject.setTint() : '';
+      bodyA.label === 'twentyBumper' ? bodyA.gameObject.setTint() : '';
     });
   }
 
