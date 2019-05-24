@@ -76,9 +76,8 @@ class Pinball extends Phaser.Scene {
     });
 
     // Add sprites with actions to game
-    gameState.launcherBlocker = this.matter.add.image(407, 20, 'launcherBlocker').setStatic(true);
+    gameState.launcherBlocker = this.matter.add.image(384, 15, 'launcherBlocker').setStatic(true);
     gameState.launcherBlocker.body.label = 'launcherBlocker';
-    gameState.launcherBlocker.body.restitution = 0.5;
 
     gameState.launcher = this.matter.add.image(407, 660, 'launcherSpring').setStatic(true);
     gameState.livesDisplay = this.add.text(340 , 20, 'Lives: 3', { fontSize: '16px', fill: '#000' });
@@ -107,7 +106,7 @@ class Pinball extends Phaser.Scene {
     this.add.rectangle(410, 660, 70, 125, 0x998354);
 
     const blockerPositionY = () => {
-      gameState.launcherBlocker.y = 100;
+      gameState.launcherBlocker.y = 80;
     }
 
     const bumperCollisionActions = (score, velocity, event) => {
@@ -199,7 +198,7 @@ class Pinball extends Phaser.Scene {
         gameState.lives = gameState.lives -= 1;
         gameState.livesDisplay.setText('Lives: ' + gameState.lives);
         gameState.scoreDisplay.setText('Score: '+ gameState.score)
-        gameState.launcherBlocker.y = 20;
+        gameState.launcherBlocker.y = 15;
         this.sound.play('rawr')
         this.spawnBall();
 
