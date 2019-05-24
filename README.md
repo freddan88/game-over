@@ -2,7 +2,7 @@
 
 > Project Canvas using Phaser.js at Yrgo in Sweden Gothenburg. Deadline for: 2019-05-27
 
-![T-rex skipping rope](https://media.giphy.com/media/mTrUbEjM1Agta/giphy.gif)
+<img src="https://media.giphy.com/media/mTrUbEjM1Agta/giphy.gif" width=100%>
 
 _Languages Used:_ \
 _HTML, Javascript, [Phaser.js](https://phaser.io "Phaser.js"), Markdown <- Readme.md_
