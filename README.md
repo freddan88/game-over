@@ -27,7 +27,7 @@ _HTML, Javascript, [Phaser.js](https://phaser.io "Phaser.js"), Markdown <- Readm
 
 ### Usage
 If you would like to play the game locally you can download or [clone](https://github.com/freddan88/game-over.git) the repository to your machine. To open the game you'll need to start a local server and point it to the root af the repository. Then open a browser and go to your server-adress and play away.
-If you'd rather play online please visit [dinoball.netlify.com](dinoball.netlify.com).
+If you'd rather play online please visit [dinoball.netlify.com](https://dinoball.netlify.com/).
 
 #### Controls
 To launch the ball use _space_ ( ) or _down arrow key_ (__v__) <br/>
