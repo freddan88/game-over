@@ -15,19 +15,28 @@ class Pinball extends Phaser.Scene {
     this.load.image('gameCeiling', 'assets/sprites/topWall.png');
     this.load.image('scoreCircle', 'assets/sprites/scoreCircle.png');
     this.load.image('launcherWall', 'assets/sprites/launcherWall.png');
-    this.load.image('launcherSpring', 'assets/sprites/launcherSpring.png');
     this.load.image('flipperPaddle', 'assets/sprites/flipperPaddle.png');
-    this.load.atlas('sheet', 'assets/sprites/spriteSheet.png', 'assets/sprites/spriteAtlas.json');
     this.load.image('launcherBlocker', 'assets/sprites/launcherBlocker.png');
+    this.load.image('launcherSpring', 'assets/sprites/launcherSpring.png');
     this.load.image('bodyBackground', 'assets/images/bodyBackground.png');
-    this.load.json('shapes', 'assets/sprites/spriteShapes.json');
     this.load.image('image', 'assets/images/image.png');
+    this.load.json('shapes', 'assets/sprites/spriteShapes.json');
+    this.load.atlas('sheet', 'assets/sprites/spriteSheet.png', 'assets/sprites/spriteAtlas.json');
+    // this.load.audio('roar', 'assets/sounds/Monster03.wav');
+    // this.load.audio('snarl', 'assets/sounds/Monster01.wav');
+    // this.load.audio('growl', 'assets/sounds/growl_01.flac');
+    this.load.audio('rawr', 'assets/sounds/Monster2.wav');
+    this.load.audio('music', 'assets/sounds/GameMusic2.ogg');
   }
 
   create() {
     const shapes = this.cache.json.get('shapes');
     gameState.cursors = this.input.keyboard.createCursorKeys();
     this.matter.world.setBounds(0, 0, 440, 720, 1, true, true, true, false);
+
+    // Add soundeffects
+    game.sound.add('rawr');
+    game.sound.add('music');
 
     // Add Images to world
     this.add.image(0, 0, 'bodyBackground').setOrigin(0,0);
@@ -46,6 +55,11 @@ class Pinball extends Phaser.Scene {
     // Add main ball to game
     this.spawnBall();
 
+    this.sound.play('music', {
+      loop:true,
+      volume: 2
+    });
+  
     // Add main flipperpaddles to game
     gameState.flipperPaddleR = this.matter.add.image(325, 625, 'flipperPaddle').setFrictionAir(0.25)
     gameState.flipperPaddleR.body.label = 'flipperPaddleR'
@@ -185,7 +199,9 @@ class Pinball extends Phaser.Scene {
         gameState.livesDisplay.setText('Lives: ' + gameState.lives);
         gameState.scoreDisplay.setText('Score: '+ gameState.score)
         gameState.launcherBlocker.y = 20;
+        this.sound.play('rawr')
         this.spawnBall();
+
       } else if(gameState.lives <= 0){
         gameState.gameOver = true;
         this.scene.stop('Pinball');
