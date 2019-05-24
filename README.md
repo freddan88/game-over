@@ -13,6 +13,8 @@ _HTML, Javascript, [Phaser.js](https://phaser.io "Phaser.js"), Markdown <- Readm
 - [Isa Areschoug](https://github.com/Neyrin "Neyrin")
 - [Fredrik Leemann](https://github.com/freddan88 "freddan88")
 
+### Testers
+
 ### Pull Request Log
 - [#1 Game setup and paddle function](https://github.com/freddan88/game-over/pull/1)
 - [#2 Add initial gameplan](https://github.com/freddan88/game-over/pull/6)
