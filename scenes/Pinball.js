@@ -59,7 +59,7 @@ class Pinball extends Phaser.Scene {
       loop:true,
       volume: 2
     });
-  
+
     // Add main flipperpaddles to game
     gameState.flipperPaddleR = this.matter.add.image(325, 625, 'flipperPaddle').setFrictionAir(0.25)
     gameState.flipperPaddleR.body.label = 'flipperPaddleR'
@@ -190,6 +190,7 @@ class Pinball extends Phaser.Scene {
 
       if (gameState.cursors.space.isDown || gameState.cursors.down.isDown) {
         gameState.launcher.setVelocityY(-15)
+        this.game.sound.context.resume();
       } else {
         gameState.launcher.setVelocityY(0)
       }
