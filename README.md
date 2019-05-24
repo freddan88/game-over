@@ -14,6 +14,8 @@ _HTML, Javascript, [Phaser.js](https://phaser.io "Phaser.js"), Markdown <- Readm
 - [Fredrik Leemann](https://github.com/freddan88 "freddan88")
 
 ### Testers
+- [Per Baltzar, Yrgo - WU18](https://github.com/perbaltzar "Per Baltzar - GitHub")
+- [Elias Johansson, Yrgo - WU18](https://github.com/eliasjohansson "Elias Johansson - GitHub")
 
 ### Pull Request Log
 - [#1 Game setup and paddle function](https://github.com/freddan88/game-over/pull/1)
