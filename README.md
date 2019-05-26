@@ -14,8 +14,10 @@ _HTML, Javascript, [Phaser.js](https://phaser.io "Phaser.js"), Markdown <- Readm
 - [Fredrik Leemann](https://github.com/freddan88 "freddan88")
 
 ### Testers
-- [Per Baltzar, Yrgo - WU18](https://github.com/perbaltzar "Per Baltzar - GitHub")
-- [Elias Johansson, Yrgo - WU18](https://github.com/eliasjohansson "Elias Johansson - GitHub")
+- [Per Baltzar, Yrgo - WU18](https://github.com/perbaltzar "perbaltzar - GitHub")
+- [Elias Johansson, Yrgo - WU18](https://github.com/eliasjohansson "eliasjohansson - GitHub")
+- [Maria Eidland, Yrgo - WU18](https://github.com/mariaeid "mariaeid - GitHub")
+- [Linn Johansson, Yrgo - WU18](https://github.com/linn2punkt0 "linn2punkt0 - GitHub")
 - Agneta Leemann
 - Christian Leemann
 - Magnus Gustaver
