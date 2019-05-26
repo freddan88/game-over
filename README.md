@@ -18,6 +18,8 @@ _HTML, Javascript, [Phaser.js](https://phaser.io "Phaser.js"), Markdown <- Readm
 - [Elias Johansson, Yrgo - WU18](https://github.com/eliasjohansson "Elias Johansson - GitHub")
 - Agneta Leemann
 - Christian Leemann
+- Magnus Gustaver
+- Annika Areschoug
 
 ### Pull Request Log
 - [#1 Game setup and paddle function](https://github.com/freddan88/game-over/pull/1)
