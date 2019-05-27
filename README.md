@@ -48,6 +48,19 @@ Enjoy!
 
 [Code License: MIT](https://choosealicense.com/licenses/mit/)
 
+### Comments
+
+Good structure on project 
+
+Pinball.js - 119-158: Maybe save into variable to avoid long text and makes it more readable.
+Pinball.js - 25-27: Remove unused code? :>
+Maybe seperate pull request into smaller changes
+Put link to netlify in description :>
+
+Comments made by [Amin](https://github.com/Amin-Mohamed) &
+[Laureta](https://github.com/xhika)
+
+
 ### Resources
 - Sounds from [Opengameart.org](https://opengameart.org/)
    - 'The Adventure Begins' by [Bart Kelsey](https://opengameart.org/users/bart)
