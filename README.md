@@ -60,6 +60,8 @@ Put link to netlify in description :>
 Comments made by [Amin](https://github.com/Amin-Mohamed) &
 [Laureta](https://github.com/xhika)
 
+### Our comments can be found at:
+https://github.com/AdrianJung/Game-Over/pull/20
 
 ### Resources
 - Sounds from [Opengameart.org](https://opengameart.org/)
