@@ -69,4 +69,6 @@ https://github.com/AdrianJung/Game-Over/pull/20
    - Other sounds by [Michael Klier](https://www.m-klier.de/)
 - [Codecademy.com, Game Development with Phaser.JS](https://www.codecademy.com/login)
 - [Phaser documentation](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/)
+- [TexturePacker](https://www.codeandweb.com/texturepacker)
+- [PhysicsEditor](https://www.codeandweb.com/physicseditor)
 - [Phaser examples](http://labs.phaser.io/)
